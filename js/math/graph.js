@@ -24,16 +24,20 @@ class Graph {
     this.segments.push(seg);
   }
 
-  containSegment(seg) {
+  containsSegment(seg) {
     return this.segments.find((s) => s.equals(seg));
   }
 
   tryAddSegment(seg) {
-    if (!this.containSegment(seg) && !seg.p1.equals(seg.p2)) {
+    if (!this.containsSegment(seg) && !seg.p1.equals(seg.p2)) {
       this.addSegment(seg);
       return true;
     }
     return false;
+  }
+
+  removeSegment(seg) {
+    this.segments.splice(this.segments.indexOf(seg), 1);
   }
 
   draw(ctx) {
