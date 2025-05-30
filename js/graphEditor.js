@@ -7,6 +7,7 @@ class GraphEditor {
 
         this.selected = null;
         this.hovered = null;
+        this.dragging = false;
 
         this.#addEventListeners();
     }
@@ -22,6 +23,7 @@ class GraphEditor {
                 const mouse = new Point(evt.offsetX, evt.offsetY);
                 if (this.hovered) {
                     this.selected = this.hovered;
+                    this.dragging = true;
                     return;
                 }
                 this.graph.addPoint(mouse);
@@ -33,8 +35,14 @@ class GraphEditor {
         this.canvas.addEventListener("mousemove", (evt) => {
             const mouse = new Point(evt.offsetX, evt.offsetY);
             this.hovered = getNearestPoint(mouse, this.graph.points, 10);
+            if (this.dragging == true) {
+                this.selected.x = mouse.x;
+                this.selected.y = mouse.y;
+            }
         });
         this.canvas.addEventListener("contextmenu", (evt) => evt.preventDefault());
+        this.canvas.addEventListener("mouseup", () => this.dragging = flase);
+
     }
 
     #removePoint(point) {
