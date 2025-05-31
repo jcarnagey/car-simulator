@@ -41,8 +41,7 @@ class GraphEditor {
             }
         });
         this.canvas.addEventListener("contextmenu", (evt) => evt.preventDefault());
-        this.canvas.addEventListener("mouseup", () => this.dragging = flase);
-
+        this.canvas.addEventListener("mouseup", () => this.dragging = false);
     }
 
     #removePoint(point) {
